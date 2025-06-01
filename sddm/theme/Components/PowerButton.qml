@@ -6,8 +6,8 @@ Item {
   implicitWidth: powerButton.width
   Button {
     id: powerButton
-    height: 32
-    width: 32
+    height: 40
+    width: 40
     hoverEnabled: true
     icon {
       source: Qt.resolvedUrl("../icons/power.svg")
