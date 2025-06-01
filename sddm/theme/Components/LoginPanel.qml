@@ -16,7 +16,7 @@ Item {
       horizontalCenter: parent.horizontalCenter
     }
     height: inputHeight * 1.5
-    width: inputWidth * 1.5
+    width: (inputWidth + 32) * 1.5
     radius: 4
     visible: config.LoginBackground == "true" ? true : false
     color: config.bgDark
@@ -54,16 +54,19 @@ Item {
     id: column
     spacing: 8
     z: 5
-    width: inputWidth
+    width: inputWidth + 32  // Slightly wider
     anchors {
       verticalCenter: parent.verticalCenter
       horizontalCenter: parent.horizontalCenter
     }
+
     UserField {
       id: userField
-      height: 30
+      height: 42  // Slightly smaller
       width: parent.width
+      font.pixelSize: 18  // Slightly smaller font
     }
+
     RowLayout {
       id: row
       spacing: 8
@@ -71,17 +74,20 @@ Item {
         verticalCenter: userField
         horizontalCenter: parent.horizontalCenter
       }
+
       PasswordField {
         id: passwordField
-        Layout.preferredWidth: (inputWidth - loginButton.width - row.spacing)
-        Layout.preferredHeight: 30
+        Layout.preferredWidth: (inputWidth + 32 - loginButton.width - row.spacing)
+        Layout.preferredHeight: 42  // Slightly smaller
+        font.pixelSize: 18  // Slightly smaller font
         onAccepted: loginButton.clicked()
       }
+
       Button {
         id: loginButton
-        Layout.preferredWidth: 30
-        Layout.preferredHeight: 30
-        enabled: user != "" && password != "" ? true : false
+        Layout.preferredWidth: 42
+        Layout.preferredHeight: 42
+        enabled: user !== "" && password !== ""
         hoverEnabled: true
         icon {
           source: Qt.resolvedUrl("../icons/login.svg")
@@ -136,12 +142,6 @@ Item {
           State {
             name: "enabled"
             when: loginButton.enabled
-            PropertyChanges {
-              target: buttonBackground
-            }
-            PropertyChanges {
-              target: buttonBackground
-            }
           }
         ]
         transitions: Transition {
@@ -158,7 +158,6 @@ Item {
   }
   Connections {
     target: sddm
-
     function onLoginFailed() {
       passwordField.text = ""
       passwordField.focus = true
