@@ -1,7 +1,7 @@
 # Main i3 config file: just includes modular snippets
 
 set $mod Mod4
-font pango: IosevkaTerm Nerd Font Bold 12
+font pango: IosevkaTerm Nerd Font Bold 11
 
 include config.d/10-autostart.conf
 include config.d/20-keybindings.conf

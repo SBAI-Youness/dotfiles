@@ -10,7 +10,7 @@ TextField {
   font {
     family: config.Font
     pixelSize: config.FontSize
-    bold: false
+    bold: true
   }
   color: config.textDefault
   horizontalAlignment: Text.AlignHLeft

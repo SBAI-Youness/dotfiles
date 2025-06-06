@@ -7,7 +7,9 @@ Loader {
         id: time
         color: config.textDefault
         timeFont.family: config.Font
+        timeFont.bold: true
         dateFont.family: config.Font
+        dateFont.bold: true
     }
 
     anchors {
