@@ -1,3 +1,7 @@
+-- Neovim plugins configuration
+-- This file manages all plugins using packer.nvim
+
+-- Function to ensure packer is installed
 local ensure_packer = function()
   local fn = vim.fn
   local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -11,8 +15,12 @@ end
 
 local packer_bootstrap = ensure_packer()
 
+-- Initialize packer and configure plugins
 return require('packer').startup(function(use)
+  -- Packer can manage itself
   use 'wbthomason/packer.nvim'
+
+  -- Colorscheme
   use {
     'blazkowolf/gruber-darker.nvim',
     config = function()
@@ -20,23 +28,34 @@ return require('packer').startup(function(use)
       vim.cmd([[colorscheme gruber-darker]])
     end
   }
+
+  -- File explorer
   use 'nvim-tree/nvim-tree.lua'
   use 'nvim-tree/nvim-web-devicons'
+
+  -- Status line
   use 'nvim-lualine/lualine.nvim'
+
+  -- Syntax highlighting
   use 'nvim-treesitter/nvim-treesitter'
+
+  -- Fuzzy finder
   use {
-	  'nvim-telescope/telescope.nvim',
+  'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
+
+  -- Markdown preview
   use {
     'iamcco/markdown-preview.nvim',
     run = function() vim.fn["mkdp#util#install"]() end, -- Install on first use
     ft = { "markdown" }, -- Load only for markdown files
   }
+
+  -- Auto pairs
   use 'windwp/nvim-autopairs'
 
   -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end
