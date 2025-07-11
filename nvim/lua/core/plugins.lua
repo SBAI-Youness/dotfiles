@@ -1,62 +1,109 @@
--- Neovim plugins configuration
--- This file manages all plugins using packer.nvim
-
--- Function to ensure packer is installed
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out, "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
   end
-  return false
 end
 
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
--- Initialize packer and configure plugins
-return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
+local plugins = {
   -- Colorscheme
-  use {
+  {
     'blazkowolf/gruber-darker.nvim',
     config = function()
       vim.o.termguicolors = true
       vim.cmd([[colorscheme gruber-darker]])
     end
-  }
+  },
 
   -- File explorer
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-tree/nvim-web-devicons'
+  'nvim-tree/nvim-tree.lua',
+  'nvim-tree/nvim-web-devicons',
 
   -- Status line
-  use 'nvim-lualine/lualine.nvim'
+  'nvim-lualine/lualine.nvim',
 
   -- Syntax highlighting
-  use 'nvim-treesitter/nvim-treesitter'
+  'nvim-treesitter/nvim-treesitter',
 
   -- Fuzzy finder
-  use {
-  'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} }
-  }
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { {'nvim-lua/plenary.nvim'} }
+  },
 
   -- Markdown preview
-  use {
+  {
     'iamcco/markdown-preview.nvim',
-    run = function() vim.fn["mkdp#util#install"]() end, -- Install on first use
-    ft = { "markdown" }, -- Load only for markdown files
-  }
+    run = function() vim.fn["mkdp#util#install"]() end,
+    ft = { "markdown" },
+  },
 
   -- Auto pairs
-  use 'windwp/nvim-autopairs'
+  'windwp/nvim-autopairs',
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+  -- LSP
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'neovim/nvim-lspconfig',
+
+  -- Completion
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-nvim-lsp',
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
+  'rafamadriz/friendly-snippets',
+
+  -- Git
+  'lewis6991/gitsigns.nvim',
+  'tpope/vim-fugitive',
+
+  -- Show existing keymaps
+  {
+    'folke/which-key.nvim',
+    event = "VeryLazy",
+    opts = {},
+  },
+
+  -- Toogle terminal
+  {
+    "akinsho/toggleterm.nvim",
+    version = "*",
+    config = function()
+      require("core.plugin_config.toggleterm")
+    end,
+  },
+
+  {
+    'ej-shafran/compile-mode.nvim',
+    branch = "latest",
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { "m00qek/baleia.nvim", tag = "v1.3.0" },
+    },
+    config = function()
+      ---@type CompileModeOpts
+      vim.g.compile_mode = {
+            -- to add ANSI escape code support, add:
+            -- baleia_setup = true,
+
+            -- to make `:Compile` replace special characters (e.g. `%`) in
+            -- the command (and behave more like `:!`), add:
+          bang_expansion = true,
+        }
+    end
+  },
+}
+
+local opts = {}
+
+require("lazy").setup(plugins, opts)

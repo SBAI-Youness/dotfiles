@@ -1,42 +1,55 @@
 local gruber_darker_simple = {
   normal = {
-    a = { fg = '#181818', bg = '#f4cf86', gui = 'bold' },
-    b = { fg = '#f4f4ff', bg = '#2c2c2c' },
-    c = { fg = '#f4f4ff', bg = '#181818' },
+    a = { fg = '#282828', bg = '#fabd2f', gui = 'bold' },
+    b = { fg = '#f4e8ba', bg = '#504945' },
+    c = { fg = '#ebdbb2', bg = '#282828' },
   },
   insert = {
-    a = { fg = '#181818', bg = '#96a6c8', gui = 'bold' },
-    b = { fg = '#f4f4ff', bg = '#2c2c2c' },
-    c = { fg = '#f4f4ff', bg = '#181818' },
+    a = { fg = '#282828', bg = '#f4e8ba', gui = 'bold' },
+    b = { fg = '#f4e8ba', bg = '#504945' },
+    c = { fg = '#ebdbb2', bg = '#282828' },
   },
   visual = {
-    a = { fg = '#181818', bg = '#f4cf86', gui = 'bold' },
-    b = { fg = '#f4f4ff', bg = '#2c2c2c' },
-    c = { fg = '#f4f4ff', bg = '#181818' },
+    a = { fg = '#282828', bg = '#d8a657', gui = 'bold' },
+    b = { fg = '#f4e8ba', bg = '#504945' },
+    c = { fg = '#ebdbb2', bg = '#282828' },
   },
   replace = {
-    a = { fg = '#181818', bg = '#ff5f5f', gui = 'bold' },
-    b = { fg = '#f4f4ff', bg = '#2c2c2c' },
-    c = { fg = '#f4f4ff', bg = '#181818' },
+    a = { fg = '#282828', bg = '#fb4934', gui = 'bold' },
+    b = { fg = '#f4e8ba', bg = '#504945' },
+    c = { fg = '#ebdbb2', bg = '#282828' },
   },
   inactive = {
-    a = { fg = '#888888', bg = '#181818', gui = 'bold' },
-    b = { fg = '#888888', bg = '#181818' },
-    c = { fg = '#888888', bg = '#181818' },
+    a = { fg = '#928374', bg = '#282828', gui = 'bold' },
+    b = { fg = '#928374', bg = '#282828' },
+    c = { fg = '#928374', bg = '#282828' },
   },
 }
 
 require('lualine').setup {
   options = {
     icons_enabled = true,
-    theme = gruber_custom,
+    theme = gruber_darker_simple,
+    globalstatus = true,
   },
   sections = {
     lualine_a = {
       {
+        'mode',
+      }
+    },
+    lualine_b = {
+      {
         'filename',
         path = 1,
+        symbols = { modified = '●', readonly = '🔒' },
       }
+    },
+    lualine_c = {
+      {
+        'branch',
+        icon = '',
+      },
     }
   }
 }

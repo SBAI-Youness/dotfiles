@@ -19,6 +19,7 @@ opt.laststatus = 2     -- Always show status line
 opt.autowrite = true   -- Auto write when switching buffers
 opt.autoread = true    -- Auto read when file is changed outside
 opt.cursorline = true  -- Highlight current line
+opt.clipboard = "unnamedplus"
 
 -- Indentation settings
 opt.tabstop = 2        -- Number of spacers that <Tab> counts for
@@ -33,7 +34,7 @@ opt.ruler = true           -- Show cursor position
 
 -- Whitespace visualization
 opt.list = true                  -- Show invisible characters
-opt.listchars = { space = "·" }  -- Show spaces as dots
+opt.listchars = { tab = "··", space = "·" }  -- Show spaces as dots
 
 -- Set cursor shape to block in all modes
 opt.guicursor = "n-v-c-sm:block,i-ci-ve:block,r-cr-o:block"
