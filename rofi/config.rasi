@@ -9,12 +9,12 @@ configuration {
 @theme "/dev/null"
 
 * {
-    color0: #1d1f21;       /* Background - dark */
-    color1: #282a2e;       /* Input/selected background */
-    color2: #4c7899;       /* i3 ciel blue */
-    color3: #f0f0f0;       /* Clear light text */
-    color4: #ffffff;       /* Bright white for contrast */
-    color5: #5f819d;       /* Muted border/accent */
+    color0: #0e0e0f;       /* Darker background */
+    color1: #1a1a1b;       /* Slightly brighter input/selection background */
+    color2: #5daef2;       /* Brighter blue accent */
+    color3: #e0e0e0;       /* Brighter general text */
+    color4: #ffffff;       /* White for selected text */
+    color5: #6b9cc9;       /* Muted accent/border */
 
     background-color: @color0;
     text-color: @color3;
@@ -49,6 +49,10 @@ prompt {
     text-color: @accent-color;
 }
 
+entry {
+    text-color: @text-color;
+}
+
 listview {
     lines: 8;
     columns: 2;
@@ -59,7 +63,7 @@ element {
     padding: 8px;
     spacing: 8px;
     background-color: transparent;
-    text-color: @color3;
+    text-color: @text-color;
 }
 
 element selected {
