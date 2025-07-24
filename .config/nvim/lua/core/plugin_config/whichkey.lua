@@ -27,6 +27,7 @@ local groups = {
   { "<leader>m", group = "Markdown" }, -- Group for markdown-related commands
   { "<leader>t", group = "Terminal" },
   { "<leader>c", group = "Compile mode" },
+  { "<leader>l", group = "LSP" },
 }
 
 -- Register groups (no need to define individual keymaps)
