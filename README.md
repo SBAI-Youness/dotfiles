@@ -62,7 +62,7 @@
 Use GNU Stow or your preferred method to symlink these dotfiles into your home directory:
 
 ```bash
-stow i3 kitty nvim rofi sddm
+stow --adopt . -t ~/.config
 ```
 
 ### Dependencies (Fedora)
