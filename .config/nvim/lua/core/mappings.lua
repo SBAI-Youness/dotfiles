@@ -30,3 +30,25 @@ vim.keymap.set('v', '<A-Up>', ":m '<-2<CR>gv=gv", { noremap = true, silent = tru
 vim.keymap.set('v', '<A-Down>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 
 vim.keymap.set("i", "jk", "<ESC>")
+vim.keymap.set("i", "JK", "<ESC>")
+
+-- Save with Ctrl+s
+vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
+
+-- Quit with Ctrl+q
+vim.keymap.set('n', '<C-q>', ':x<CR>', { noremap = true, silent = true })
+
+-- Save & quit with <C-s>q
+vim.keymap.set('n', '<C-s>q', ':x<CR>', { noremap = true, silent = true })
+
+-- Normal
+vim.keymap.set("n", "<C-Left>", "b", opts)
+vim.keymap.set("n", "<C-Right>", "e", opts)
+
+-- Visual
+vim.keymap.set("v", "<C-Left>", "b", opts)
+vim.keymap.set("v", "<C-Right>", "e", opts)
+
+-- Operator-pending
+vim.keymap.set("o", "<C-Left>", "b", opts)
+vim.keymap.set("o", "<C-Right>", "e", opts)

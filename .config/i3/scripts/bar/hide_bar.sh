@@ -1,21 +1,13 @@
-#!/usr/bin/env python3
-import i3ipc
+#!/bin/bash
 
-i3 = i3ipc.Connection()
+# subscribe to workspace changes
+i3-msg -t subscribe '[ "workspace" ]' | jq -r --unbuffered '.change + " " + (.current.name // "")' | while read change ws; do
+    if [ "$change" = "focus" ]; then
+        if [ "$ws" = "2" ]; then
+            i3-msg bar mode invisible mybar >/dev/null
+        else
+            i3-msg bar mode dock mybar >/dev/null
+        fi
+    fi
+done
 
-# Workspace where you want the bar hidden
-HIDE_WORKSPACE = "10"
-
-def on_workspace_focus(i3, e):
-    if e.current and e.current.name == HIDE_WORKSPACE:
-        # Hide bar when entering workspace 10
-        i3.command('bar mode hide')
-    else:
-        # Restore bar when leaving workspace 10
-        i3.command('bar mode dock')
-
-# Listen for workspace focus changes
-i3.on("workspace::focus", on_workspace_focus)
-
-# Start the event loop
-i3.main()
