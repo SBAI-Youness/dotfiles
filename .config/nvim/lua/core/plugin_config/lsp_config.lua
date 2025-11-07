@@ -8,6 +8,8 @@ require("mason-lspconfig").setup({
     "ts_ls",      -- JS/TS/JSX/TSX
     "intelephense",  -- PHP
     "jdtls",         -- Java
+    "html",         -- HTML
+    "cssls",        -- CSS
   }
 })
 
@@ -56,6 +58,15 @@ vim.lsp.config["intelephense"] = {
 }
 
 vim.lsp.config["jdtls"] = {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+vim.lsp.config["html"] = {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+vim.lsp.config["cssls"] = {
   on_attach = on_attach,
   capabilities = capabilities,
 }
