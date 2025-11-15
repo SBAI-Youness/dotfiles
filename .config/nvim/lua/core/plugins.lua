@@ -125,6 +125,14 @@ local plugins = {
     end
   },
 
+  -- Comments
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+        -- add any options here
+    }
+  }
+
 }
 
 local opts = {}
