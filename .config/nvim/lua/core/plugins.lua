@@ -131,8 +131,17 @@ local plugins = {
     opts = {
         -- add any options here
     }
-  }
+  },
 
+  -- idk what this is hhh
+  {
+    'gisketch/triforce.nvim',
+    dependencies = { 'nvzone/volt' },
+    config = function()
+      require('triforce').setup({
+      })
+    end,
+  },
 }
 
 local opts = {}
