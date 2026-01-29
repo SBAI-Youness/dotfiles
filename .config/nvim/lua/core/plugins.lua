@@ -142,6 +142,15 @@ local plugins = {
       })
     end,
   },
+
+  -- My plugin: snapshoot.nvim
+  {
+    dir = "~/GitHub/mine/snapshoot.nvim",
+    name = "snapshoot.nvim",
+    config = function()
+      require("snapshoot").setup()
+    end,
+  },
 }
 
 local opts = {}
