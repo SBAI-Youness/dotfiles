@@ -35,7 +35,7 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 
-#fastfetch
+stty -ixon
 
 source <(fzf --zsh)
 
@@ -45,6 +45,33 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias t='tree'
+alias o='xdg-open'
 alias timer='bash ~/.config/i3/scripts/utilities/timer.sh'
+alias f='feh --scale-down -Z'
+alias sudoku="cd /home/youness_sbai/GitHub/mine/Sudoku_Game/build/ && ./main"
+alias webstart='sudo systemctl start httpd mysqld'
+alias webstop='sudo systemctl stop httpd mysqld'
+alias sowon='/home/youness_sbai/GitHub/cloned/sowon/sowon'
+
+# Show Wi-Fi networks
+alias wifi="nmcli dev wifi list" # wifi
+# List network devices
+alias netdev="nmcli device status" # netdev
+# Connect to a Wi-Fi network
+alias wificon="nmcli dev wifi connect" # wificon MySSID password mypassword
+# Disconnect Wi-Fi
+alias wifidown="nmcli radio wifi off" # wifidown
+# Enable Wi-Fi
+alias wifiup="nmcli radio wifi on" # wifiup
+# List saved connections
+alias netlist="nmcli connection show" # netlist
+# Connect to a saved network
+alias netup="nmcli connection up" # netup my-home-wifi
+# Bring a connection down
+alias netdown="nmcli connection down" # netup my-home-wifi
+# Auto-rescan Wi-Fi
+alias wifiscan="nmcli dev wifi rescan && nmcli dev wifi list" # wifiscan
 
 . "$HOME/.cargo/env"
+export PATH="/home/youness_sbai/.config/herd-lite/bin:$PATH"
+export PHP_INI_SCAN_DIR="/home/youness_sbai/.config/herd-lite/bin:$PHP_INI_SCAN_DIR"
