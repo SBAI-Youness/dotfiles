@@ -1,12 +1,26 @@
-# Main i3 config file: just includes modular snippets
+# Main i3 configuration file
+# This file is kept minimal and delegates configuration to modular snippets
 
+# Set the Mod key (Windows/Super key)
 set $mod Mod4
-font pango: IosevkaTerm Nerd Font Bold 10
 
+
+# Default font used in the i3 bar and window titles
+font pango: IosevkaTerm Nerd Font Bold 11
+
+
+# Modular configuration includes
+# Each file handles a specific part of the setup for better organization
+
+# Autostart applications and system services
 include config.d/10-autostart.conf
+# Keybindings for volume, media keys, apps, screenshots, etc.
 include config.d/20-keybindings.conf
+# Workspace definitions and workspace keybindings
 include config.d/30-workspaces.conf
+# Window management rules and behavior
 include config.d/40-window-management.conf
+# Status bar configuration (i3bar/i3status)
 include config.d/50-bar.conf
+# Theme, colors, wallpaper, and visual styling
 include config.d/60-themes.conf
-include config.d/70-screenlayout.conf
