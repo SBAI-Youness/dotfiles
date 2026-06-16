@@ -6,4 +6,3 @@
 require("core.mappings")      -- Basic Editor options
 require("core.options")       -- Key mappings
 require("core.plugins")       -- Plugin management
-require("core.plugin_config") -- Plugin configuration

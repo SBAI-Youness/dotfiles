@@ -20,58 +20,102 @@ local plugins = {
   {
     'blazkowolf/gruber-darker.nvim',
     config = function()
-      vim.o.termguicolors = true
-      vim.cmd([[colorscheme gruber-darker]])
+      require("core.plugin_config.colorscheme")
     end
   },
 
   -- File explorer
-  'nvim-tree/nvim-tree.lua',
+  {
+    'nvim-tree/nvim-tree.lua',
+    config = function()
+      require("core.plugin_config.nvim-tree")
+    end
+  },
   'nvim-tree/nvim-web-devicons',
 
   -- Status line
-  'nvim-lualine/lualine.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
+    config = function()
+      require("core.plugin_config.lualine")
+    end
+  },
 
   -- Syntax highlighting
-  'nvim-treesitter/nvim-treesitter',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require("core.plugin_config.treesitter")
+    end
+  },
 
   -- Fuzzy finder
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { {'nvim-lua/plenary.nvim'} }
+    dependencies = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      require("core.plugin_config.telescope")
+    end
   },
 
   -- Markdown preview
   {
     'iamcco/markdown-preview.nvim',
-    run = function() vim.fn["mkdp#util#install"]() end,
+    build = function() vim.fn["mkdp#util#install"]() end,
     ft = { "markdown" },
+    config = function()
+      require("core.plugin_config.markdown_preview")
+    end
   },
 
   -- Auto pairs
-  'windwp/nvim-autopairs',
+  {
+    'windwp/nvim-autopairs',
+    config = function()
+      require("core.plugin_config.autopairs")
+    end
+  },
 
   -- LSP
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
-  'neovim/nvim-lspconfig',
+  {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require("core.plugin_config.lsp_config")
+    end
+  },
 
   -- Completion
-  'hrsh7th/nvim-cmp',
-  'hrsh7th/cmp-nvim-lsp',
-  'L3MON4D3/LuaSnip',
-  'saadparwaiz1/cmp_luasnip',
-  'rafamadriz/friendly-snippets',
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'rafamadriz/friendly-snippets',
+    },
+    config = function()
+      require("core.plugin_config.completions")
+    end
+  },
 
   -- Git
-  'lewis6991/gitsigns.nvim',
+  {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require("core.plugin_config.git-stuff")
+    end
+  },
   'tpope/vim-fugitive',
 
   -- Show existing keymaps
   {
     'folke/which-key.nvim',
     event = "VeryLazy",
-    opts = {},
+    config = function()
+      require("core.plugin_config.whichkey")
+    end,
   },
 
   -- Toogle terminal
@@ -92,30 +136,16 @@ local plugins = {
       { "m00qek/baleia.nvim", tag = "v1.3.0" },
     },
     config = function()
-      ---@type CompileModeOpts
       vim.g.compile_mode = {
-            -- to add ANSI escape code support, add:
-            -- baleia_setup = true,
-
-            -- to make `:Compile` replace special characters (e.g. `%`) in
-            -- the command (and behave more like `:!`), add:
           bang_expansion = true,
-        }
+      }
+      require("core.plugin_config.compile-mode")
     end
   },
 
   -- Image Preview
   {
-    "vhyrro/luarocks.nvim",
-    priority = 1001, -- this plugin needs to run before anything else
-    opts = {
-      rocks = { "magick" },
-    },
-  },
-
-  {
     "3rd/image.nvim",
-    dependencies = { "luarocks.nvim" },
     config = function()
       require("image").setup({
         backend = "kitty",
@@ -128,9 +158,9 @@ local plugins = {
   -- Comments
   {
     'numToStr/Comment.nvim',
-    opts = {
-        -- add any options here
-    }
+    config = function()
+      require("core.plugin_config.comments")
+    end
   },
 
   -- idk what this is hhh
@@ -138,17 +168,7 @@ local plugins = {
     'gisketch/triforce.nvim',
     dependencies = { 'nvzone/volt' },
     config = function()
-      require('triforce').setup({
-      })
-    end,
-  },
-
-  -- My plugin: snapshoot.nvim
-  {
-    dir = "~/GitHub/mine/snapshoot.nvim",
-    name = "snapshoot.nvim",
-    config = function()
-      require("snapshoot").setup()
+      require("core.plugin_config.triforce")
     end,
   },
 }
